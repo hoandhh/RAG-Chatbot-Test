@@ -1,3 +1,6 @@
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 from langchain_community.document_loaders import DirectoryLoader, UnstructuredFileLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pprint import pprint
@@ -57,7 +60,7 @@ splits = text_splitter.split_documents(docs)
 
 # Initialize Gemini (Google Generative AI) embeddings for semantic vectorization of chunks
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-2-preview",
+    model="gemini-embedding-001",
 )
 
 # Create a FAISS vector store for fast similarity search on chunk embeddings
@@ -87,9 +90,8 @@ template = (
 # Format the prompt using LangChain's chat template
 prompt = ChatPromptTemplate.from_template(template)
 
-# Initialize the Gemini language model (flash-lite, zero temperature for deterministic answers)
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.1-flash-lite",
+    model="gemini-2.5-flash",
     temperature=0,
 )
 
@@ -106,8 +108,8 @@ rag_chain = (
 )
 
 # Example question to test the whole pipeline
-question = "What is the main idea of the paper?"
+question = "Consult the document to find out the main idea of the paper and list the main points."
 response = rag_chain.invoke(question)
 
 # Output the model's response to the console
-print(response)
+pprint(response)

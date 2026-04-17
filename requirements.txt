@@ -1,7 +1,9 @@
-langchain-text-splitters
-langchain-community
-langchain-google-genai
-langchain-core
-faiss-cpu
-unstructured[pdf]
-pypdf
+# Ghim theo môi trường đã chạy ổn; chỉnh khi nâng cấp có chủ đích.
+langchain-core==1.2.28
+langchain-text-splitters==1.1.1
+langchain-community==0.4.1
+langchain-google-genai==4.2.1
+google-genai==1.72.0
+faiss-cpu==1.13.2
+unstructured[pdf]==0.22.18
+pypdf==6.10.0
